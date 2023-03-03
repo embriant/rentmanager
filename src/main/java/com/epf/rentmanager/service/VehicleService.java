@@ -29,7 +29,6 @@ public class VehicleService {
 	
 	
 	public long create(Vehicle vehicle) throws ServiceException {
-		// TODO: créer un véhicule
 		try {
 			return VehicleDao.getInstance().create(vehicle);
 		} catch (DaoException e) {
@@ -38,7 +37,6 @@ public class VehicleService {
 	}
 
 	public Vehicle findById(long id) throws ServiceException {
-		// TODO: récupérer un véhicule par son id
 		if (id<0){
 			throw new ServiceException("l'id est inférieur à 0");
 		}
@@ -51,8 +49,11 @@ public class VehicleService {
 	}
 
 	public List<Vehicle> findAll() throws ServiceException {
-		// TODO: récupérer tous les clients
-		return new ArrayList<Vehicle>();
+		try{
+			return VehicleDao.getInstance().findAll();
+		}catch (DaoException e){
+			throw new ServiceException();
+		}
 	}
 
 	public int count() throws ServiceException {

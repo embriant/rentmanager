@@ -30,17 +30,20 @@ public class VehicleDao {
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps =
-					connection.prepareStatement(CREATE_VEHICLE_QUERY);
+					connection.prepareStatement(CREATE_VEHICLE_QUERY, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, vehicle.getConstructeur());
 			ps.setInt(2, vehicle.getNb_places());
+			ps.execute();
 			ResultSet resultSet = ps.getGeneratedKeys();
+			resultSet.next();
 			int id = resultSet.getInt(1);
 
-			ps.execute();
+
 			ps.close();
 			connection.close();
 			return id;
 		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 			throw new DaoException();
 		}	}
 
@@ -48,7 +51,7 @@ public class VehicleDao {
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps =
-					connection.prepareStatement(DELETE_VEHICLE_QUERY);
+					connection.prepareStatement(DELETE_VEHICLE_QUERY, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1,(int) vehicle.getId());
 			ps.execute();
 

@@ -35,12 +35,13 @@ public class ReservationDao {
 					connection.prepareStatement(CREATE_RESERVATION_QUERY);
 			ps.setInt(1, reservation.getClient_id());
 			ps.setInt(2, reservation.getVehicle_id());
-			ps.setDate(2, Date.valueOf(reservation.getDebut()));
-			ps.setDate(2, Date.valueOf(reservation.getFin()));
+			ps.setDate(3, Date.valueOf(reservation.getDebut()));
+			ps.setDate(4, Date.valueOf(reservation.getFin()));
+			ps.execute();
 			ResultSet resultSet = ps.getGeneratedKeys();
+			resultSet.next();
 			int id = resultSet.getInt(1);
 
-			ps.execute();
 			ps.close();
 			connection.close();
 			return id;

@@ -7,7 +7,7 @@ import com.epf.rentmanager.service.VehicleService;
 public class Test {
     public static void main(String[] args){
         try {
-            System.out.println(VehicleService.getInstance().findById(2));
+            System.out.println(ClientService.getInstance().findAll());
         }catch (ServiceException e){
             e.printStackTrace();
         }

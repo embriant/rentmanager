@@ -31,15 +31,16 @@ public class ClientDao {
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps =
-					connection.prepareStatement(CREATE_CLIENT_QUERY);
+					connection.prepareStatement(CREATE_CLIENT_QUERY, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, client.getNom());
 			ps.setString(2, client.getPrenom());
-			ps.setString(2, client.getEmail());
-			ps.setDate(2, Date.valueOf(client.getNaissance()));
+			ps.setString(3, client.getEmail());
+			ps.setDate(4, Date.valueOf(client.getNaissance()));
+			ps.execute();
 			ResultSet resultSet = ps.getGeneratedKeys();
+			resultSet.next();
 			int id = resultSet.getInt(1);
 
-			ps.execute();
 			ps.close();
 			connection.close();
 			return id;

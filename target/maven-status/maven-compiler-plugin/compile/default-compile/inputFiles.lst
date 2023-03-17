@@ -1,4 +1,6 @@
+/Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/configuration/AppConfiguration.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/servlet/VehicleCreateServlet.java
+/Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/service/ReservationService.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/model/Vehicle.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/model/Client.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/exception/DaoException.java
@@ -10,10 +12,13 @@
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/servlet/HomeServlet.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/service/VehicleService.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/utils/IOUtils.java
+/Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/configuration/WebConfiguration.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/dao/ReservationDao.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/dao/ClientDao.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/model/Reservation.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/servlet/VehicleListServlet.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/persistence/ConnectionManager.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/persistence/FillDatabase.java
+/Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/servlet/ReservationCreateServlet.java
 /Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/servlet/ClientListServlet.java
+/Users/emmabriant/Desktop/EPF/4A/S8/Java/rentmanager/src/main/java/com/epf/rentmanager/servlet/ReservationListServlet.java

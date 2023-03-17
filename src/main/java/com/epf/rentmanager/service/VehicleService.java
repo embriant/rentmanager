@@ -9,28 +9,19 @@ import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.dao.ClientDao;
 import com.epf.rentmanager.dao.VehicleDao;
+import org.springframework.stereotype.Service;
 
+@Service
 public class VehicleService {
-
 	private VehicleDao vehicleDao;
-	public static VehicleService instance;
-	
-	private VehicleService() {
-		this.vehicleDao = VehicleDao.getInstance();
+
+	private VehicleService(VehicleDao vehicleDao) {
+		this.vehicleDao = vehicleDao;
 	}
-	
-	public static VehicleService getInstance() {
-		if (instance == null) {
-			instance = new VehicleService();
-		}
-		
-		return instance;
-	}
-	
 	
 	public long create(Vehicle vehicle) throws ServiceException {
 		try {
-			return VehicleDao.getInstance().create(vehicle);
+			return vehicleDao.create(vehicle);
 		} catch (DaoException e) {
 			throw new ServiceException();
 		}
@@ -41,7 +32,7 @@ public class VehicleService {
 			throw new ServiceException("l'id est inférieur à 0");
 		}
 		try{
-			return VehicleDao.getInstance().findById(id);
+			return vehicleDao.findById(id);
 		}catch(DaoException e){
 			e.printStackTrace();
 			throw new ServiceException();
@@ -50,7 +41,7 @@ public class VehicleService {
 
 	public List<Vehicle> findAll() throws ServiceException {
 		try{
-			return VehicleDao.getInstance().findAll();
+			return vehicleDao.findAll();
 		}catch (DaoException e){
 			throw new ServiceException();
 		}

@@ -1,4 +1,5 @@
 com/epf/rentmanager/servlet/ClientCreateServlet.class
+com/epf/rentmanager/Configuration/WebConfiguration.class
 com/epf/rentmanager/servlet/VehicleCreateServlet.class
 com/epf/rentmanager/servlet/ClientListServlet.class
 com/epf/rentmanager/servlet/VehicleListServlet.class

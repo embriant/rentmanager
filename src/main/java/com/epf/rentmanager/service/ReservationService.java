@@ -5,6 +5,7 @@ import java.util.List;
 import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Reservation;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,18 @@ public class ReservationService {
 
     public int count() throws ServiceException {
         return findAll().size();
+    }
+
+    public Reservation findById(long id) throws ServiceException {
+        // TODO: récupérer un client par son id
+        if (id < 0) {
+            throw new ServiceException("l'id est inférieur à 0");
+        }
+        try {
+            return reservationDao.findById(id);
+        } catch (DaoException e) {
+            e.printStackTrace();
+            throw new ServiceException();
+        }
     }
 }

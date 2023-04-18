@@ -1,6 +1,7 @@
 package com.epf.rentmanager.servlet;
 
 import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
@@ -17,9 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet("/rents/create")
-public class ReservationCreateServlet extends HttpServlet {
+@WebServlet("/users/details")
+public class ClientDetailsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Autowired
     ReservationService reservationService;
@@ -35,30 +38,21 @@ public class ReservationCreateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-            request.setAttribute("clients",clientService.findAll());
-            request.setAttribute("vehicles",vehicleService.findAll());
-        }catch (ServiceException e) {
-            throw new RuntimeException(e);
-        }
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/rents/create.jsp").forward(request, response);
-    }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
-            int client = Integer.valueOf(request.getParameter("client"));
-            int vehicle = Integer.valueOf(request.getParameter("car"));
-            LocalDate debut = LocalDate.parse(request.getParameter("begin"));
-            LocalDate fin = LocalDate.parse(request.getParameter("end"));
-            Reservation reservation = new Reservation();
-            reservation.setVehicle_id(vehicle);
-            reservation.setClient_id(client);
-            reservation.setDebut(debut);
-            reservation.setFin(fin);
-            reservationService.create(reservation);
+            int id = Integer.valueOf(request.getParameter("id"));
+            List<Reservation> rents = reservationService.findResaByClientId(id);
+            List<Vehicle> vehicles = new ArrayList<>();
+            for (Reservation rent : rents) {
+                vehicles.add(vehicleService.findById(rent.getVehicle_id()));
+            }
+
+            request.setAttribute("client",clientService.findById(id));
+            request.setAttribute("rents",rents);
+            request.setAttribute("vehicleService",vehicleService);
+            request.setAttribute("vehicles",vehicles);
+
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/rents/create.jsp").forward(request, response);
-
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/details.jsp").forward(request, response);
     }
-
 }

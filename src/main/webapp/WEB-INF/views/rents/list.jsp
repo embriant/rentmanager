@@ -42,7 +42,7 @@
                                         <td>${rent.debut}</td>
                                         <td>${rent.fin}</td>
                                     <td>
-                                        <a class="btn btn-primary disabled" href="${pageContext.request.contextPath}/cars?id=1">
+                                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/rents/details?id=1">
                                             <i class="fa fa-play"></i>
                                         </a>
                                         <a class="btn btn-success disabled" href="#">

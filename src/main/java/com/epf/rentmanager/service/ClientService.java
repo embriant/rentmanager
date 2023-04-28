@@ -30,6 +30,24 @@ public class ClientService {
 		}
 	}
 
+	public long edit(Client client) throws ServiceException {
+		// TODO: créer un client
+		try {
+			return clientDao.edit(client);
+		} catch (DaoException e) {
+			throw new ServiceException();
+		}
+	}
+
+	public long delete(Client client) throws ServiceException {
+		// TODO: créer un client
+		try {
+			return clientDao.delete(client);
+		} catch (DaoException e) {
+			throw new ServiceException();
+		}
+	}
+
 	public Client findById(long id) throws ServiceException {
 		// TODO: récupérer un client par son id
 		if (id < 0) {

@@ -28,6 +28,23 @@ public class ReservationService {
         }
     }
 
+    public long edit(Reservation reservation) throws ServiceException {
+        try {
+            return reservationDao.edit(reservation);
+        } catch (DaoException e) {
+            throw new ServiceException();
+        }
+    }
+
+    public long delete(Reservation reservation) throws ServiceException {
+        // TODO: créer un client
+        try {
+            return reservationDao.delete(reservation);
+        } catch (DaoException e) {
+            throw new ServiceException();
+        }
+    }
+
     public List<Reservation> findResaByClientId(int id) throws ServiceException {
         if (id<0){
             throw new ServiceException("l'id est inférieur à 0");

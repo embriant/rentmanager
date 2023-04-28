@@ -23,7 +23,7 @@ public class ReservationDao {
 	private static final String FIND_RESERVATIONS_BY_CLIENT_QUERY = "SELECT id, vehicle_id, debut, fin FROM Reservation WHERE client_id=?;";
 	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY = "SELECT id, client_id, debut, fin FROM Reservation WHERE vehicle_id=?;";
 	private static final String FIND_RESERVATIONS_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation;";
-		
+	private static final String EDIT_RESERVATION_QUERY = "UPDATE Reservation SET client_id=?, vehicle_id=?, debut=?, fin=? WHERE id=?;";
 	public long create(Reservation reservation) throws DaoException {
 		try {
 			Connection connection = ConnectionManager.getConnection();
@@ -44,6 +44,28 @@ public class ReservationDao {
 		} catch (SQLException e) {
 			throw new DaoException();
 		}
+	}
+
+	public long edit(Reservation reservation) throws DaoException {
+		try {
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement ps = connection.prepareStatement(EDIT_RESERVATION_QUERY, Statement.RETURN_GENERATED_KEYS);
+
+			ps.setInt(1, reservation.getClient_id());
+			ps.setInt(2, reservation.getVehicle_id());
+			ps.setDate(3, Date.valueOf(reservation.getDebut()));
+			ps.setDate(4, Date.valueOf(reservation.getFin()));
+			ps.setLong(5, reservation.getId());
+			ps.execute();
+
+			ps.close();
+			connection.close();
+			return reservation.getId();
+
+		} catch (SQLException e) {
+			throw new DaoException();
+		}
+
 	}
 	
 	public long delete(Reservation reservation) throws DaoException {

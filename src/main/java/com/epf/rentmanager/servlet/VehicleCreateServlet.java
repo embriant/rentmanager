@@ -3,6 +3,9 @@ package com.epf.rentmanager.servlet;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.VehicleService;
+import com.epf.rentmanager.utils.Reservations;
+import com.epf.rentmanager.utils.Utils;
+import com.epf.rentmanager.utils.Vehicles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -15,6 +18,8 @@ import java.io.IOException;
 
 @WebServlet("/cars/create")
 public class VehicleCreateServlet extends HttpServlet {
+    Utils utils;
+    private Vehicles vehiclesUtils = new Vehicles();
     @Autowired
     VehicleService vehicleService;
     @Override
@@ -28,16 +33,15 @@ public class VehicleCreateServlet extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/create.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
-            String manufacturer = request.getParameter("manufacturer");
-            int seats = Integer.valueOf(request.getParameter("seats"));
-            Vehicle vehicle = new Vehicle();
-            vehicle.setConstructeur(manufacturer);
-            vehicle.setId(vehicleService.count()+1);
-            vehicle.setNb_places(seats);
-            vehicleService.create(vehicle);
+        try {
+            String constructeur = request.getParameter("manufacturer");
+            int nb_places = utils.readInt(request.getParameter("seats"));
+            long id = vehicleService.count() + 1;
+            Vehicle vehicle = new Vehicle(id, constructeur, nb_places);
+            if (vehiclesUtils.validVehicle(vehicle)){
+            vehicleService.create(vehicle);}
         } catch (ServiceException e) {
-        throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/create.jsp").forward(request, response);
 
